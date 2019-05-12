@@ -1,44 +1,20 @@
 # opsschool-midterm
 Opsschool 2019 mid-course project
 
+The goal of this project, is to create a full ci process for a web application.
 
-Use the following tools
+The AWS environment is created using terraform
+Terreaform uses ansible to complete the environment configuration
 
-Ansible
-
-Terraform
-
-K8s
-
-Docker 
-
-Consul
-
-
-
+Environment details:
+- Jenkins Master - contains the application pipeline, and uses dynamic slaves on EC2 to run the pipeline
+	1. The pipeline clones the application repo
+	2. Runs tests
+	3. Pushes the new code to dockerhub image
+	4. Deploys the new container to K8s
+- K8s deploys the docker image to 2 minions
+- Consul monitors the K8s Nodes.
 
 
 
-
-Create a VPC with 2 subnets (privet and public) - done
-
-Using Ansible install and configure k8s
-
-Pick a small application (from github) 
-
-Run the following process (using Jenkins)
-
-Clone your repo
-
-Run tests (if exist)
-
-Build a docker image of your application
-
-Put new docker image in docker hub
-
-Deploy your application in K8s and expose the service to the world
-
-The application needs to register with consul 
-
-
-You should add a test file (depending on the output of terraform)
+Usage - terraform apply -var-file terraform.tfvars
