@@ -1,7 +1,7 @@
 # opsschool-midterm
 Opsschool 2019 mid-course project
 
-The goal of this project, is to create a full ci process for a web application.
+The goal of this project, is to create a full CI/CD process for a web application.
 
 The AWS environment is created using terraform
 Terreaform uses ansible to complete the environment configuration
