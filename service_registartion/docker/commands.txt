@@ -1,0 +1,25 @@
+# Install Docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+apt-get update
+apt-get install -y docker-ce
+
+
+# Run Registrator
+docker run -d \
+    --name=registrator \
+    --net=host \
+    --volume=/var/run/docker.sock:/tmp/docker.sock \
+    gliderlabs/registrator:latest \
+      consul://localhost:8500
+
+# Bring up and register random port
+docker run --rm -d --name=webserver -P -e SERVICE_TAGS=webserver,docker yeasy/simple-web:latest
+
+# DeRegister
+docker stop webserver
